@@ -48,7 +48,15 @@ class DatabaseManager:
     
     def add_article(self, title, content, image, user_id, category_id):
         self.open()
-        self.cursor.execute("""SELECT * FROM articles WHERE category_id?""", [category_id])
+        self.cursor.execute("""INSERT INTO articles(title, content, image, user_id, category_id)
+                            VALUES(?,?,?,?,?)""", [title, content, image, user_id, int(category_id)])       
         data = self.cursor.fetchall()
         self.close()
-        return data
+        return
+    
+    def search_article(self, query):
+        self.open()
+        query = '%' + query + '%'
+        self.cursor.execute("""SELECT * FROM articles WHERE (title LIKE ? OR content LIKE ?)""", [query, query])
+        data = self.cursor.fetchall()
+        self.close()

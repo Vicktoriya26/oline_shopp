@@ -18,16 +18,16 @@ class DatabaseManager:
 
 
 
-    def get_all_articles(self):
+    def get_all_products(self):
         self.open()
-        self.cursor.execute("""SELECT * FROM articles""")
+        self.cursor.execute("""SELECT * FROM products""")
         data = self.cursor.fetchall()
         self.close()
         return data
     
-    def get_article(self, article_id):
+    def get_products(self, products_id):
         self.open()
-        self.cursor.execute("""SELECT * FROM articles WHERE id=?""", [article_id])
+        self.cursor.execute("""SELECT * FROM products WHERE id=?""", [products_id])
         data = self.cursor.fetchone()
         self.close()
         return data
@@ -39,24 +39,24 @@ class DatabaseManager:
         self.close()
         return data
     
-    def get_categories_articles(self, category_id):
+    def get_categories_products(self, category_id):
         self.open()
-        self.cursor.execute("""SELECT * FROM articles WHERE category_id?""", [category_id])
+        self.cursor.execute("""SELECT * FROM products WHERE category_id?""", [category_id])
         data = self.cursor.fetchall()
         self.close()
         return data
     
-    def add_article(self, title, content, image, user_id, category_id):
+    def add_products(self, title, content, image, user_id, category_id):
         self.open()
-        self.cursor.execute("""INSERT INTO articles(title, content, image, user_id, category_id)
+        self.cursor.execute("""INSERT INTO products(title, content, image, user_id, category_id)
                             VALUES(?,?,?,?,?)""", [title, content, image, user_id, int(category_id)])       
         data = self.cursor.fetchall()
         self.close()
         return
     
-    def search_article(self, query):
+    def search_products(self, query):
         self.open()
         query = '%' + query + '%'
-        self.cursor.execute("""SELECT * FROM articles WHERE (title LIKE ? OR content LIKE ?)""", [query, query])
+        self.cursor.execute("""SELECT * FROM products WHERE (title LIKE ? OR content LIKE ?)""", [query, query])
         data = self.cursor.fetchall()
         self.close()

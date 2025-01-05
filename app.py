@@ -19,44 +19,44 @@ def get_categories():
 
 @app.route("/")  # Вказуємо url-адресу для виклику функції
 def index():
-    articles = db.get_all_articles()
-    return render_template("index.html", articles=articles)
+    products = db.get_all_products()
+    return render_template("index.html", products=products)
 
 
-@app.route("/articles/<int:article_id>")  # Вказуємо url-адресу для виклику функції
-def article_page(article_id):
-    article = db.get_article(article_id)
-    return render_template("article_page.html", article=article) 
+@app.route("/products/<int:products_id>")  # Вказуємо url-адресу для виклику функції
+def products_page(products_id):
+    products = db.get_products(products_id)
+    return render_template("products_page.html", products=products) 
 
 
 
 @app.route("/categories/<int:category_id>")  # Вказуємо url-адресу для виклику функції
 def category_page(category_id):
-    articles = db.get_article(category_id)
-    return render_template("index.html", articles=articles) 
+    products = db.get_products(category_id)
+    return render_template("index.html", products=products) 
 
-@app.route("/articles/new", methods=["GET", "POST"])
-def new_article():
+@app.route("/products/new", methods=["GET", "POST"])
+def new_products():
     if request.method == 'POST':
         image = request.file['image']
         image.save(IMG_PATH + image.filename)
-        db.add_article(request.form['title'], request.form['content'],
+        db.add_products(request.form['title'], request.form['content'],
                         image.filename, 1, request.form['category'])
         flash("Статтю додано")
     else:
-        flash("Виберіть статтю ш аповніть всі поля.")
-    return render_template("new_article.html") 
+        flash("Виберіть статтю заповніть всі поля.")
+    return render_template("new_products.html") 
 
 
 @app.route("/search")  # Вказуємо url-адресу для виклику функції
 def search():
-    articles = db.get_all_articles()
+    products = db.get_all_products()
 
     if request.method == 'GET':
         query = request.args.get("query")
-        articles = db.search_article(query)
+        products = db.search_products(query)
 
-    return render_template("index.html", articles=articles)
+    return render_template("index.html", products=products)
 
 
 

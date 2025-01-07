@@ -1,0 +1,36 @@
+body {
+    background: rgb(255, 255, 255);
+    color: rgb(13, 13, 13);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+main{
+
+}
+
+.about{
+    background: rgb(92, 1, 85);
+    padding: 10px;
+    color: white;
+}
+
+.button{
+    background: rgb(92, 1, 85);
+    padding: 10px;
+    margin: 20px;
+    border: 2px solid rgb(255, 255, 255);
+    color: white;
+    text-decoration: none;
+    border-radius: 15px;
+    box-shadow: 5px 5px 20px rgb(112, 112, 112);
+}
+
+
+.my-btn{
+    background-color: blueviolet;
+}
+
+.menu{
+    background: rgb(92, 1, 85);
+}

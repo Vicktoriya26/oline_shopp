@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    <title>{{products 1}} - yes,original </title>
+{% endblock title %}
+
+
+{% block content %}
+    <main class="container">
+        <h1 class="m-5">{{products[1]}}</h1>
+            <small>Опубліковано: {{products>[4]}}</small>
+            <div>
+                <img scr="{{ url_for('static', filename='img/'+products[3]) }}" class="img-fluid my-3"alt="...">
+            </div>
+            {% for p in products.split('\n') %}
+                <p>{{p}}</p>
+            {% endfor %}
+            
+        
+        
+    </main>
+  {% endblock content %}
